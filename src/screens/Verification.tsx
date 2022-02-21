@@ -6,7 +6,7 @@ import OTPInputView from "@twotalltotems/react-native-otp-input";
 import { loginStyle } from "../styles/Login";
 // import { ALERT_TYPE, Toast } from "react-native-alert-notification";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { connect } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { setAuth } from "../redux/actions";
 
 import {
@@ -28,6 +28,11 @@ interface VerificationState {
 const CELL_COUNT = 4;
 
 const Verification = ({ navigation, route }: VerificationProps) => {
+
+  const state = useSelector((state:any) => state.rootReducer);
+
+  const dispatch = useDispatch()
+
   const [value, setValue] = useState("1234");
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -64,7 +69,9 @@ const Verification = ({ navigation, route }: VerificationProps) => {
       //   type: ALERT_TYPE.SUCCESS
       // });
       await AsyncStorage.setItem("_id", _id);
-      setAuth(_id);
+      const id = await AsyncStorage.getItem("_id");
+      dispatch({ type: "SET_AUTH", payload: id });
+      console.log(state)
     } else {
       // Toast.show({
       //   title: "OTP",

@@ -496,7 +496,7 @@ class RoomScreen extends Component<RoomScreenProps, RoomScreenState> {
   }
   startWebrtc(): void {
     console.log('selfData', this.selfData);
-    console.log(this.roomData, this.selfData)
+    console.log(this.roomData.members, this.selfData)
     WebrtcCallHandler.getInstance().setup(
       this.roomData._id,
       this.selfData._id + '_' + Math.random(),

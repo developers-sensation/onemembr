@@ -31,7 +31,7 @@ const App = () => {
     // }
   };
 
-  const LoadFonts = async ()=>{
+  const useFonts = async ()=> {
     await loadAsync({
       'p-300': require("./assets/fonts/p-300.otf"),
       'p-400': require("./assets/fonts/p-400.otf"),
@@ -39,13 +39,16 @@ const App = () => {
       'p-600': require("./assets/fonts/p-600.otf"),
       'p-700': require("./assets/fonts/p-700.otf"),
     });
+  }
+  const LoadFonts = async ()=>{
+    await useFonts();
     await SplashScreen.hideAsync();
-    setLoading(false);
   }
 
   useEffect(() => {
     // const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
     LoadFonts();
+    setLoading(false);
     // When the component is unmounted, remove the listener
     // return () => unsubscribe();
   }, []);
