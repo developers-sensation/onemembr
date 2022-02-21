@@ -14,17 +14,16 @@ import {
 } from "react-native";
 import SearchBox from "../components/SearchBox";
 import { topicAndPeopleStyle } from "../styles/topicandpeople";
-import p4 from "../assets/img/p4.png";
+import p4 from "../../assets/img/p4.png";
 import TopicBox from "../components/topicBox";
 import { height, width } from "../styles/dimension";
 import { styles } from "../styles/Welcome";
 import BottomModal from "react-native-raw-bottom-sheet";
-import grp from "../assets/img/grp.png";
-import recording from "../assets/img/recording.png";
-import timer from "../assets/img/timer.png";
-import write from "../assets/img/write.png";
+import grp from "../../assets/img/grp.png";
+import recording from "../../assets/img/recording.png";
+import timer from "../../assets/img/timer.png";
+import write from "../../assets/img/write.png";
 import { infoStyle } from "../components/SearchBox/info.styles";
-import Feather from "react-native-vector-icons/Feather";
 import {
   createRoom,
   fetchUser,
@@ -32,13 +31,13 @@ import {
   fetchUpcomingRooms
 } from "../api/apis";
 import { connect, useSelector } from "react-redux";
-import { ALERT_TYPE, Toast } from "react-native-alert-notification";
-import * as Picker from "react-native-image-picker";
+// import { ALERT_TYPE, Toast } from "react-native-alert-notification";
+import * as ImagePicker from "expo-image-picker";
 import { shareLink, uploadToS3 } from "../utils/utils";
 import DatePicker from "react-native-date-picker";
 import { topicBoxStyle } from "../components/topicBox/topic.styles";
 import moment from "moment";
-import Ion from "react-native-vector-icons/Ionicons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import Loader from "../components/Loader";
 
 interface TopicAndSuggestionProps {
@@ -104,12 +103,17 @@ class UpcomingRoom extends Component<
         maxHeight: 200,
         maxWidth: 200
       };
+      const res: any = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1
+      });
 
-      await Picker.launchImageLibrary(options, async (res: any) => {
-        this.setState({
-          localUri: res.assets[0].uri,
-          fileName: res.assets[0].fileName
-        });
+      // await Picker.launchImageLibrary(options, async (res: any) => {
+      this.setState({
+        localUri: res.assets[0].uri,
+        fileName: res.assets[0].fileName
       });
     } catch (error) {
       console.log(error);
@@ -129,11 +133,11 @@ class UpcomingRoom extends Component<
     const { id } = this.props.state;
     const { roomTitle, roomDesc, activeI, roomImg } = this.state;
     if (!roomTitle || !roomDesc) {
-      Toast.show({
-        type: ALERT_TYPE.DANGER,
-        textBody: "Room Title and Room Description are required",
-        title: "Room"
-      });
+      // Toast.show({
+      //   type: ALERT_TYPE.DANGER,
+      //   textBody: "Room Title and Room Description are required",
+      //   title: "Room"
+      // });
       this.setState({ loading: false });
       return;
     }
@@ -149,11 +153,11 @@ class UpcomingRoom extends Component<
       eventTime: new Date(this.state.setDate).getTime()
     });
     if (res.data.isSuccess) {
-      Toast.show({
-        type: ALERT_TYPE.SUCCESS,
-        textBody: "Room is created",
-        title: "Room"
-      });
+      // Toast.show({
+      //   type: ALERT_TYPE.SUCCESS,
+      //   textBody: "Room is created",
+      //   title: "Room"
+      // });
       this.handleFetchRoom();
       this.modal.close();
       this.setState({
@@ -224,7 +228,7 @@ class UpcomingRoom extends Component<
 
   async shareLink(roomId: any) {
     this.setState({ loading: true });
-    const link = await shareLink(roomId);
+    const link:any = await shareLink(roomId);
     this.setState({ loading: false });
     Share.share({ message: link });
   }
@@ -353,7 +357,7 @@ class UpcomingRoom extends Component<
                         right: 10
                       }}
                     >
-                      <Ion name="ios-share-social" size={17} color={"#fff"} />
+                      <Ionicons  name="ios-share-social" size={17} color={"#fff"} />
                     </TouchableOpacity>
                   </View>
                 );

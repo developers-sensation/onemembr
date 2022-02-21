@@ -8,7 +8,7 @@ export default class Splash extends Component {
       <View style={styles.splash}>
         <Image
           style={styles.splashLogo}
-          source={require('../assets/img/logo.png')}
+          source={require('../../assets/img/logo.png')}
         />
         <Text style={styles.splashName}>OneMembr</Text>
       </View>

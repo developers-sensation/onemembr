@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import SearchBox from '../components/SearchBox';
 import {Intereststyles} from '../styles/Interest';
-import Fa from 'react-native-vector-icons/FontAwesome';
+import {FontAwesome} from '@expo/vector-icons';
 import {height, width} from '../styles/dimension';
 import {interests, updateInterests} from '../api/apis';
 import Loader from '../components/Loader';
@@ -105,7 +105,7 @@ class Interest extends Component<InterestProps, InterestState> {
             height: height * 0.17,
           }}>
           <View style={Intereststyles.header}>
-            <Fa name="angle-left" size={30} color={'#000'} />
+            <FontAwesome name="angle-left" size={30} color={'#000'} />
             <View
               style={{
                 flex: 1,

@@ -10,7 +10,7 @@ import reducers from "./src/redux/reducers";
 import RootStack from './src/navigations/RootStack';
 // import dynamicLinks from '@react-native-firebase/dynamic-links';
 import * as SplashScreen from 'expo-splash-screen';
-import useFonts from "./src/hooks/useFonts";
+import { loadAsync, useFonts } from "expo-font";
 import Loader from "./src/components/Loader";
 
 SplashScreen.preventAutoHideAsync()
@@ -32,9 +32,15 @@ const App = () => {
   };
 
   const LoadFonts = async ()=>{
-      await useFonts();
-      setLoading(false);
-      await SplashScreen.hideAsync();
+    await loadAsync({
+      'p-300': require("./assets/fonts/p-300.otf"),
+      'p-400': require("./assets/fonts/p-400.otf"),
+      'p-500': require("./assets/fonts/p-500.otf"),
+      'p-600': require("./assets/fonts/p-600.otf"),
+      'p-700': require("./assets/fonts/p-700.otf"),
+    });
+    await SplashScreen.hideAsync();
+    setLoading(false);
   }
 
   useEffect(() => {

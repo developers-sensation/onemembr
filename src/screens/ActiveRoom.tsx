@@ -15,17 +15,17 @@ import {
 } from 'react-native';
 import SearchBox from '../components/SearchBox';
 import {topicAndPeopleStyle} from '../styles/topicandpeople';
-import p4 from '../assets/img/p4.png';
+import p4 from '../../assets/img/p4.png';
 import TopicBox from '../components/topicBox';
 import {height, width} from '../styles/dimension';
 import {styles} from '../styles/Welcome';
 import BottomModal from 'react-native-raw-bottom-sheet';
-import room from '../assets/img/room.png';
-import recording from '../assets/img/recording.png';
-import timer from '../assets/img/timer.png';
-import write from '../assets/img/write.png';
+import room from '../../assets/img/room.png';
+import recording from '../../assets/img/recording.png';
+import timer from '../../assets/img/timer.png';
+import write from '../../assets/img/write.png';
 import {infoStyle} from '../components/SearchBox/info.styles';
-import Feather from 'react-native-vector-icons/Feather';
+import { Feather } from '@expo/vector-icons';
 import {
   createRoom,
   fetchUser,
@@ -33,8 +33,8 @@ import {
   fetchRoomById,
 } from '../api/apis';
 import {connect} from 'react-redux';
-import {ALERT_TYPE, Toast, Dialog} from 'react-native-alert-notification';
-import * as Picker from 'react-native-image-picker';
+// import {ALERT_TYPE, Toast, Dialog} from 'react-native-alert-notification';
+import * as ImagePicker from 'expo-image-picker';
 import {uploadToS3} from '../utils/utils';
 import DatePicker from 'react-native-date-picker';
 import WebrtcCallHandler from '../utils/WebrtcCallHandler';
@@ -117,19 +117,19 @@ class ActiveRoom extends Component<
           new Date(roomInfo.data.data.eventTime).getDate() >
             new Date().getDate()
         ) {
-          Dialog.show({
-            title: 'Room',
-            textBody: `This Room is scheduled at: ${moment(
-              roomInfo.data.data.eventTime,
-            ).format('YYYY-MM-DD hh:mm A')}`,
-            type: ALERT_TYPE.WARNING,
-          });
+          // Dialog.show({
+          //   title: 'Room',
+          //   textBody: `This Room is scheduled at: ${moment(
+          //     roomInfo.data.data.eventTime,
+          //   ).format('YYYY-MM-DD hh:mm A')}`,
+          //   type: ALERT_TYPE.WARNING,
+          // });
         } else {
-          Dialog.show({
-            title: 'Room',
-            textBody: 'this Room is not available',
-            type: ALERT_TYPE.DANGER,
-          });
+          // Dialog.show({
+          //   title: 'Room',
+          //   textBody: 'this Room is not available',
+          //   type: ALERT_TYPE.DANGER,
+          // });
         }
       }
 
@@ -153,12 +153,19 @@ class ActiveRoom extends Component<
         maxWidth: 200,
       };
 
-      await Picker.launchImageLibrary(options, async (res: any) => {
+      const res:any = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      // await Picker.launchImageLibrary(options, async (res: any) => {
         this.setState({
           localUri: res.assets[0].uri,
           fileName: res.assets[0].fileName,
         });
-      });
+      // });
     } catch (error) {
       console.log(error);
     }
@@ -176,11 +183,11 @@ class ActiveRoom extends Component<
     const {id} = this.props.state;
     const {roomTitle, roomDesc, activeI, roomImg} = this.state;
     if (!roomTitle || !roomDesc) {
-      Toast.show({
-        type: ALERT_TYPE.DANGER,
-        textBody: 'Room Title and Room Description are required',
-        title: 'Room',
-      });
+      // Toast.show({
+      //   type: ALERT_TYPE.DANGER,
+      //   textBody: 'Room Title and Room Description are required',
+      //   title: 'Room',
+      // });
       this.setState({loading: false});
       return;
     }
@@ -198,11 +205,11 @@ class ActiveRoom extends Component<
     });
     if (res.data.isSuccess) {
       this.setState({loading: false});
-      Toast.show({
-        type: ALERT_TYPE.SUCCESS,
-        textBody: 'Room is created',
-        title: 'Room',
-      });
+      // Toast.show({
+      //   type: ALERT_TYPE.SUCCESS,
+      //   textBody: 'Room is created',
+      //   title: 'Room',
+      // });
       this.handleFetchRoom();
       this.modal.close();
       if (new Date(res.data.data.eventTime).getDate() <= new Date().getDate()) {

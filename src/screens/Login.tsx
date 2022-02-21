@@ -9,12 +9,12 @@ import {
   View,
 } from 'react-native';
 import {loginStyle} from '../styles/Login';
-import Logo from '../assets/img/logo.png';
+import Logo from '../../assets/img/logo.png';
 import {width} from '../styles/dimension';
 import {styles} from '../styles/Welcome';
-import fb from '../assets/img/fb.png';
-import google from '../assets/img/google.png';
-import twitter from '../assets/img/twitter.png';
+import fb from '../../assets/img/fb.png';
+import google from '../../assets/img/google.png';
+import twitter from '../../assets/img/twitter.png';
 import {connect} from 'react-redux';
 import {setAuth} from '../redux/actions';
 // import {

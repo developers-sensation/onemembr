@@ -11,7 +11,7 @@ import {topicAndPeopleStyle} from '../styles/topicandpeople';
 import ActiveRoom from './ActiveRoom';
 import UpcomingRoom from './UpcomingRoom';
 import {connect, useSelector} from 'react-redux';
-import p4 from '../assets/img/p4.png';
+import p4 from '../../assets/img/p4.png';
 import {fetchUser} from '../api/apis';
 import {setUser} from '../redux/actions';
 const Tab = createMaterialTopTabNavigator();
@@ -37,7 +37,7 @@ class TopicAndSuggestion extends Component<
 
   async componentDidMount() {
     const {id} = this.props.state;
-    const user = await fetchUser(id, id);
+    const user: any = await fetchUser(id, id);
     console.log(user?.data);
     this.props.setUser(user?.data.data);
     const res = await PermissionsAndroid.request(

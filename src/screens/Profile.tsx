@@ -11,19 +11,18 @@ import {
   View,
 } from 'react-native';
 import {styles} from '../styles/profile';
-import bg from '../assets/img/bg.jpg';
-import user from '../assets/img/p6.png';
+import bg from '../../assets/img/bg.jpg';
+import user from '../../assets/img/p6.png';
 import {height, width} from '../styles/dimension';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {fetchUser, followUnfollow} from '../api/apis';
-import write from '../assets/img/write.png';
-import * as Picker from 'react-native-image-picker';
+import write from '../../assets/img/write.png';
+import * as ImagePicker from 'expo-image-picker';
 import Loader from '../components/Loader';
 import {uploadToS3} from '../utils/utils';
 import baseUrl from '../api/baseUrl';
 import {setUser} from '../redux/actions';
 import {connect} from 'react-redux';
-import Feather from 'react-native-vector-icons/Feather';
+import {AntDesign,Feather} from '@expo/vector-icons';
 import BottomModal from 'react-native-raw-bottom-sheet';
 import {infoStyle} from '../components/SearchBox/info.styles';
 
@@ -56,7 +55,7 @@ class Profile extends Component<ProfileProps, ProfileState> {
   fetchUser = async () => {
     const {id, logUser} = this.props.route.params;
     this.setState({loading: true});
-    const user = await fetchUser(id, logUser);
+    const user: any = await fetchUser(id, logUser);
     this.setState({
       user: user?.data.data,
       loading: false,
@@ -75,7 +74,14 @@ class Profile extends Component<ProfileProps, ProfileState> {
         mediaType: 'photo',
       };
       let img = null;
-      await Picker.launchImageLibrary(options, async (res: any) => {
+      const res:any = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      // await Picker.launchImageLibrary(options, async (res: any) => {
         const localUri = res.assets[0].uri;
         const fileName = res.assets[0].fileName;
         this.setState({loading: true});
@@ -97,7 +103,8 @@ class Profile extends Component<ProfileProps, ProfileState> {
           this.fetchUser();
           // this.setState({loading: false});
         }
-      });
+      // })
+      
     } catch (error) {
       console.log(error);
     }
@@ -337,7 +344,7 @@ class Profile extends Component<ProfileProps, ProfileState> {
                     width: '100%',
                     height: '100%',
                   }}
-                  source={require('../assets/img/qr.jpg')}
+                  source={require('../../assets/img/qr.jpg')}
                 />
               </View>
             </View>

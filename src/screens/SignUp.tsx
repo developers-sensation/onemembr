@@ -9,13 +9,13 @@ import {
   View,
 } from 'react-native';
 import {loginStyle} from '../styles/Login';
-import Logo from '../assets/img/logo.png';
+import Logo from '../../assets/img/logo.png';
 import {width} from '../styles/dimension';
 import CheckBox from '@react-native-community/checkbox';
 import {styles} from '../styles/Welcome';
-import fb from '../assets/img/fb.png';
-import google from '../assets/img/google.png';
-import twitter from '../assets/img/twitter.png';
+import fb from '../../assets/img/fb.png';
+import google from '../../assets/img/google.png';
+import twitter from '../../assets/img/twitter.png';
 import Fa from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
 import {setAuth} from '../redux/actions';

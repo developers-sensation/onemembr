@@ -2,7 +2,7 @@ import { RNS3 } from 'react-native-aws3';
 
 const ACCESS_KEY = 'AKIAY4XV4G23W7X7RSU7';
 const SECRET_KEY = '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';
-import dynamicLinks from '@react-native-firebase/dynamic-links';
+// import dynamicLinks from '@react-native-firebase/dynamic-links';
 import { Share } from 'react-native';
 
 const s3Options: any = {
@@ -23,17 +23,17 @@ export const uploadToS3 = async (url: string, name: any) => {
 };
 
 export const shareLink = async (roomId: string) => {
-  const link = await dynamicLinks().buildShortLink({
-    link: 'https://app.onemembr.com/' + roomId,
-    android: {
-      packageName: 'com.onemember_ui',
-    },
+  // const link = await dynamicLinks().buildShortLink({
+  //   link: 'https://app.onemembr.com/' + roomId,
+  //   android: {
+  //     packageName: 'com.onemember_ui',
+  //   },
 
-    domainUriPrefix: 'https://app.onemembr.com',
-  });
-  console.log(link);
+  //   domainUriPrefix: 'https://app.onemembr.com',
+  // });
+  // console.log(link);
 
-  return link;
+  // return link;
 };
 
 export const roomIdFromUrl = async (url: string) => {

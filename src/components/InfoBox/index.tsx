@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import {InfoBoxStyle} from './info.style';
-import user from '../../assets/img/user.png';
+import user from '../../../assets/img/user.png';
 
 interface InfoBoxProps {
   following: any;

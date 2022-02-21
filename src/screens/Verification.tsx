@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Image, Keyboard, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../styles/Verification";
-import Ion from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
 import { loginStyle } from "../styles/Login";
 // import { ALERT_TYPE, Toast } from "react-native-alert-notification";
@@ -61,7 +61,7 @@ class Verification extends Component<VerificationProps, VerificationState> {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Ion
+          <Ionicons
             name="chevron-back"
             size={22}
             color={"black"}

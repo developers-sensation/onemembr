@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { setAuth, setUser } from "../redux/actions";
 import AuthStack from "./AuthStack";
-// import MainStack from './MainStack';
+import MainStack from './MainStack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../components/Loader';
 // import {fetchUser} from '../api/apis';
@@ -30,8 +30,8 @@ function RootStack(props: any) {
   if (loading) {
     return <Loader />;
   }
-  return <AuthStack />;
-  // return <>{rootReducer.id ? <MainStack /> : <AuthStack />}</>;
+  // return <AuthStack />;
+  return <>{rootReducer.id ? <MainStack /> : <AuthStack />}</>;
 }
 
 // export default RootStack;

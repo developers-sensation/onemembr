@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {topicBoxStyle} from './topic.styles';
-import Icon from 'react-native-vector-icons/Ionicons';
-import User from 'react-native-vector-icons/AntDesign';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 interface TopicAndSuggestionProps {
   navigation: any;
@@ -108,7 +107,7 @@ export default class TopicBox extends Component<TopicAndSuggestionProps, {}> {
                 alignItems: 'center',
               }}>
               <Text style={topicBoxStyle.detailBoxText}>Zarie Saris </Text>
-              <Icon
+              <Ionicons
                 style={{
                   marginLeft: 5,
                 }}
@@ -123,7 +122,7 @@ export default class TopicBox extends Component<TopicAndSuggestionProps, {}> {
                 alignItems: 'center',
               }}>
               <Text style={topicBoxStyle.detailBoxText}>Emery Kenter </Text>
-              <Icon
+              <Ionicons
                 style={{
                   marginLeft: 5,
                 }}
@@ -146,13 +145,13 @@ export default class TopicBox extends Component<TopicAndSuggestionProps, {}> {
                     alignItems: 'center',
                     marginRight: 10,
                   }}>
-                  <User name="user" color="#60C2E1" size={15} />
+                  <AntDesign name="user" color="#60C2E1" size={15} />
                   <Text style={topicBoxStyle.detailBoxText}>
                     {this.props.room.members.length}
                   </Text>
                 </View>
                 {/* <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Icon
+                  <Ionicons
                     name="chatbubble-ellipses-outline"
                     color="#60C2E1"
                     size={15}
