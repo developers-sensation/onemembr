@@ -48,15 +48,15 @@ export const roomStyle = StyleSheet.create({
   userBox: {
     width: (width - 120) / 3,
     height: (width - 120) / 3,
-    backgroundColor: 'grey',
+    backgroundColor: '#808080',
     borderRadius: 100,
     position: 'relative',
     marginBottom: 5,
     borderWidth: 1.5,
-    borderColor: 'lighgrey',
+    borderColor: '#3a3838',
     alignItems: 'center',
     justifyContent: 'center',
-    // marginRight: (width - 120) / 9,
+    marginRight: (width - 120) / 9,
   },
   bottom: {
     position: 'absolute',

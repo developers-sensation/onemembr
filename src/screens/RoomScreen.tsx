@@ -21,8 +21,8 @@ import p1 from '../../assets/img/p1.png';
 import mic from '../../assets/img/mic.png';
 import {width} from '../styles/dimension';
 import {FlatGrid, SectionGrid} from 'react-native-super-grid';
-import HeadphoneDetection from 'react-native-headphone-detection';
-import InCallManager from 'react-native-incall-manager';
+// import HeadphoneDetection from 'react-native-headphone-detection';
+// import InCallManager from 'react-native-incall-manager';
 import {connect} from 'react-redux';
 import baseUrl from '../api/baseUrl';
 import Loader from '../components/Loader';
@@ -47,6 +47,7 @@ interface RoomScreenState {
   micOff: boolean;
   appState: any;
 }
+
 class RoomScreen extends Component<RoomScreenProps, RoomScreenState> {
   num: any;
   roomData: any;
@@ -56,12 +57,12 @@ class RoomScreen extends Component<RoomScreenProps, RoomScreenState> {
   constructor(props: any) {
     super(props);
     WebrtcCallHandler.getInstance().cleanUp();
-    console.log('props.route.params');
-
-    console.log(props.route.params);
+    // console.log('props.route.params');
+    // console.log(props.route.params);
+    console.log ( props.route.params.roomData )
     this.roomData = props.route.params.roomData;
     this.selfData = this.fetchUserData();
-    console.log(this.selfData)
+    // console.log(this.selfData)
     this.state = {
       moderators: [],
       listners: [],
@@ -99,7 +100,7 @@ class RoomScreen extends Component<RoomScreenProps, RoomScreenState> {
       console.log(nextState);
     });
 
-    InCallManager.setKeepScreenOn(true);
+    // InCallManager.setKeepScreenOn(true);
     this.props.navigation.addListener('beforeRemove', () => {
       console.log('beforeRemove');
 
@@ -113,13 +114,13 @@ class RoomScreen extends Component<RoomScreenProps, RoomScreenState> {
   componentWillUnmount() {
     this.appState.remove();
     this.unregisterCallBack();
-    InCallManager.stop();
-    if (HeadphoneDetection.remove) {
-      HeadphoneDetection.remove();
-    }
+    // InCallManager.stop();
+    // if (HeadphoneDetection.remove) {
+    //   HeadphoneDetection.remove();
+    // }
 
     WebrtcCallHandler.getInstance().cleanUp();
-    InCallManager.setKeepScreenOn(false);
+    // InCallManager.setKeepScreenOn(false);
   }
 
   async fetchUserData() {
@@ -225,11 +226,11 @@ class RoomScreen extends Component<RoomScreenProps, RoomScreenState> {
   }
   permissionError() {
     alert('Please Allow Audio Permission to continue');
-    InCallManager.stop();
+    // InCallManager.stop();
 
     WebrtcCallHandler.getInstance().cleanUp();
 
-    InCallManager.setKeepScreenOn(false);
+    // InCallManager.setKeepScreenOn(false);
   }
   onUserLeft(participant: any) {
     this.setState({
@@ -287,7 +288,6 @@ class RoomScreen extends Component<RoomScreenProps, RoomScreenState> {
     }, 500);
   }
   onNewMessage(messagePayload: any) {
-    console.log(messagePayload);
     if (messagePayload.type === 'RaiseHand') {
       const participant = WebrtcCallHandler.getInstance()
         .getMeetingHandler()
@@ -372,43 +372,43 @@ class RoomScreen extends Component<RoomScreenProps, RoomScreenState> {
     this.joinUpdateUser();
     WebrtcCallHandler.getInstance().getMeetingHandler().startMeeting();
     console.log('On startMeeting');
-    InCallManager.start({media: 'video'});
+    // InCallManager.start({media: 'video'});
     this.setState({loading: false});
-    HeadphoneDetection.isAudioDeviceConnected().then(connection => {
-      this.lastAudioRoute = connection;
-      if (connection.bluetooth === true || connection.audioJack === true) {
-        this.setState({isSpeakerEnable: false});
-        InCallManager.setForceSpeakerphoneOn(false);
-      }
+    // HeadphoneDetection.isAudioDeviceConnected().then(connection => {
+    //   this.lastAudioRoute = connection;
+    //   if (connection.bluetooth === true || connection.audioJack === true) {
+    //     this.setState({isSpeakerEnable: false});
+    //     InCallManager.setForceSpeakerphoneOn(false);
+    //   }
 
-      this.setState({
-        isOnBluetooth: connection.bluetooth,
-        isOnWiredHeadset: connection.audioJack,
-      });
-    });
-    HeadphoneDetection.addListener(connection => {
-      if (Platform.OS === 'ios') {
-        if (
-          this.lastAudioRoute !== null &&
-          connection.bluetooth === this.lastAudioRoute.bluetooth &&
-          connection.audioJack === this.lastAudioRoute.audioJack
-        ) {
-          return;
-        }
-      }
-      this.lastAudioRoute = connection;
-      if (connection.bluetooth === true || connection.audioJack === true) {
-        this.setState({isSpeakerEnable: false});
-        InCallManager.setForceSpeakerphoneOn(false);
-      } else {
-        this.setState({isSpeakerEnable: true});
-        InCallManager.setForceSpeakerphoneOn(true);
-      }
-      this.setState({
-        isOnBluetooth: connection.bluetooth,
-        isOnWiredHeadset: connection.audioJack,
-      });
-    });
+    //   this.setState({
+    //     isOnBluetooth: connection.bluetooth,
+    //     isOnWiredHeadset: connection.audioJack,
+    //   });
+    // });
+    // HeadphoneDetection.addListener(connection => {
+    //   if (Platform.OS === 'ios') {
+    //     if (
+    //       this.lastAudioRoute !== null &&
+    //       connection.bluetooth === this.lastAudioRoute.bluetooth &&
+    //       connection.audioJack === this.lastAudioRoute.audioJack
+    //     ) {
+    //       return;
+    //     }
+    //   }
+    //   this.lastAudioRoute = connection;
+    //   if (connection.bluetooth === true || connection.audioJack === true) {
+    //     this.setState({isSpeakerEnable: false});
+    //     InCallManager.setForceSpeakerphoneOn(false);
+    //   } else {
+    //     this.setState({isSpeakerEnable: true});
+    //     InCallManager.setForceSpeakerphoneOn(true);
+    //   }
+    //   this.setState({
+    //     isOnBluetooth: connection.bluetooth,
+    //     isOnWiredHeadset: connection.audioJack,
+    //   });
+    // });
   }
   onTrack(track: any) {
     console.log('onTrack');

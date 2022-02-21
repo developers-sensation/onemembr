@@ -53,7 +53,7 @@ export const roomStyle = StyleSheet.create({
     position: 'relative',
     marginBottom: 5,
     borderWidth: 1.5,
-    borderColor: 'lighgrey',
+    borderColor: '#3a3838',
     alignItems: 'center',
     justifyContent: 'center',
     // marginRight: (width - 120) / 9,

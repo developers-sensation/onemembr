@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import UserSuggestion from "../screens/UserSuggestion";
 import TopicAndSuggestion from "../screens/TopicAndPeople";
-// import RoomScreen from "../screens/RoomScreen";
+import RoomScreen from "../screens/RoomScreen";
 import Profile from "../screens/Profile";
 import Interest from "../screens/Interest";
 // import { Root } from "react-native-alert-notification";
@@ -45,7 +45,7 @@ const MainStack = () => {
           ? <Stack.Screen name="userSuggest" component={UserSuggestion} />
           : null}
         <Stack.Screen name="topic" component={TopicAndSuggestion} />
-        {/* <Stack.Screen name="roomscreen" component={RoomScreen} /> */}
+        <Stack.Screen name="roomscreen" component={RoomScreen} />
         <Stack.Screen name="profile" component={Profile} />
       </Stack.Navigator>
     // </Root>
